@@ -1,8 +1,8 @@
-\contentsline {chapter}{\tocchapter {Chapter}{}{Preface}}{v}
-\contentsline {chapter}{\tocchapter {Chapter}{1}{Mathematical Modeling and Partial Differential Equations}}{1}
-\contentsline {section}{\tocsection {}{1}{Equation of Heat Conduction}}{1}
-\contentsline {chapter}{\tocchapter {Chapter}{2}{Finite Difference Methods for Parabolic Equations}}{3}
-\contentsline {section}{\tocsection {}{1}{Computational Methods}}{3}
-\contentsline {chapter}{\tocchapter {Chapter}{3}{Numerical Solutions of Hyperbolic Equations}}{7}
-\contentsline {section}{\tocsection {}{1}{Difference Methods for a Scalar Initial-Value Problem}}{7}
-\contentsline {chapter}{\tocchapter {\chaptername }{}{Bibliography}}{9}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Preface}}{v}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{1}{Mathematical Modeling and Partial Differential Equations}}{1}{}%
+\contentsline {section}{\tocsection {}{1}{Equation of Heat Conduction}}{1}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{2}{Finite Difference Methods for Parabolic Equations}}{3}{}%
+\contentsline {section}{\tocsection {}{1}{Computational Methods}}{3}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{3}{Numerical Solutions of Hyperbolic Equations}}{9}{}%
+\contentsline {section}{\tocsection {}{1}{Difference Methods for a Scalar Initial-Value Problem}}{9}{}%
+\contentsline {chapter}{\tocchapter {\chaptername }{}{Bibliography}}{11}{}%
