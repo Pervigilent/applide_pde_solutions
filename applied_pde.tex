@@ -165,20 +165,6 @@ print("The number of non-zero elements is {0}.".format(\
 \end{verbatim}
 \end{small}
 
-The front matter has a number of sample entries that you should
-replace with your own.
-
-Replace this text with the body of your book. Do not delete the
-\verb|mainmatter| TeX field found above in a paragraph by itself
-or the numbering of different objects will be wrong.
-
-The typesetting specification selected by this document uses the
-default class options. There are, however, a number of class
-options. The available options include setting the paper size and
-the point size of the font used in the body of the document etc.
-Details are given as comments right after the \verb|documentclass|
-command.
-
 \chapter{Finite Difference Methods for Parabolic Equations}
 
 	\section{Computational Methods}
@@ -224,7 +210,8 @@ def algorithm_8_1(diffusivity,
         x[n + 1] = x[n] + increment
         V[n + 1] = initial_condition(x[n + 1])
     x[number_of_nodes + 1] = endpoint
-    V[number_of_nodes + 1] = (boundary_condition_right(0) + initial_condition(endpoint)) / 2
+    V[number_of_nodes + 1] = (boundary_condition_right(0) + \
+    	initial_condition(endpoint)) / 2
 
     # Begin time stepping
     #U = np.zeros((1, number_of_nodes + 2))
@@ -321,18 +308,7 @@ plt.show()
 		\textbf{(b)} Choose $k=0.01$ and $nmax=9$ and compare the numerical and exact solutions at time $t=0.5$.\\
 		\textbf{(c)} Choose $k=0.01$ and $nmax=99$ (so $h=0.01$) and compare the numerical and exact solutions at time $t=0.5$ at the positions $x=0.1,0.2,\ldots ,0.9$.
 		\\[12pt]
-		
-		\noindent\textbf{6.} Use Algorithm 8.5 to approximate the solution of the initial-boundary-value problem 
-		\begin{align}
-			u_t-u_{xx}=-2e^{x-t}, & 0<x<1,\, t>0\\
-			u(x,0)=e^x, & 0<x<1\\
-			u(0,t)=e^{-t}, u(1,t)=e^{1-t}, & t>0
-		\end{align}
-		\textbf{(a)} Choose $k=0.0025$ and $nmax=9$ (so $h=0.1$) and compare the numerical and exact solutions, $u(x,t)=e^{x-t}$, at time $t=0.5$.\\
-		\textbf{(b)} Choose $k=0.01$ and $nmax=9$ and compare the numerical and exact solutions at time $t=0.5$.\\
-		\textbf{(c)} Choose $k=0.01$ and $nmax=99$ (so $h=0.01$) and compare the numerical and exact solutions at time $t=0.5$.
-		\\[12pt]
-		
+
 \begin{small}
 \begin{verbatim}
 import numpy as np
@@ -353,7 +329,7 @@ def algorithm_8_2(a, # subdiagonal
     # Back substitude and store in solution array in d
     d[number_of_nodes] = d[number_of_nodes] / b[number_of_nodes]
     for l in np.arange(number_of_nodes - 1):
-        n = number_of_nodes - l
+        n = number_of_nodes - (l + 1)
         d[n] = (d[n] - c[n] * d[n + 1]) / b[n]
     return d
         
@@ -380,8 +356,9 @@ def algorithm_8_3(diffusivity,
     for n in np.arange(number_of_nodes):
         x[n + 1] = x[n] + increment
         U[n + 1] = initial_condition(x[n + 1])
-    x[number_of_nodes] = endpoint
-    U[number_of_nodes + 1] = (boundary_condition_right(0) + initial_condition(endpoint)) / 2
+    U[number_of_nodes + 1] = (boundary_condition_right(0) + \
+    	initial_condition(endpoint)) / 2
+    x[number_of_nodes + 1] = endpoint
 
     term_a = np.zeros((number_of_nodes + 2,))
     term_b = np.zeros((number_of_nodes + 2,))
@@ -397,7 +374,8 @@ def algorithm_8_3(diffusivity,
             term_c[n + 1] = - coefficient_r
             term_d[n + 1] = U[n + 1] + time_step * right_side(x[n + 1], t[j + 1])
         term_d[1] = term_d[1] + coefficient_r * boundary_condition_left(t[j + 1])
-        term_d[number_of_nodes] = term_d[number_of_nodes] + coefficient_r * boundary_condition_right(t[j + 1])
+        term_d[number_of_nodes] = term_d[number_of_nodes] + \ 
+        	coefficient_r * boundary_condition_right(t[j + 1])
         # Advance solution one time step
         term_d = algorithm_8_2(term_a, term_b, term_c, term_d, number_of_nodes)
         for n in np.arange(number_of_nodes):
@@ -406,8 +384,6 @@ def algorithm_8_3(diffusivity,
     # Output numerical solution        
     U[0] = boundary_condition_left(t[j + 1])
     U[number_of_nodes + 1] = boundary_condition_right(t[j + 1])
-
-    t = t[:-1]
             
     return U, x, t
 
@@ -472,21 +448,10 @@ ax2.legend()
 plt.show()
 \end{verbatim}
 \end{small}
-
+	
 		\noindent\textbf{6.} Use Algorithm 8.5 to approximate the solution of the initial-boundary-value problem 
 		\begin{align}
 			u_t-u_{xx}=-2e^{x-t}, & 0<x<1,\, t>0\\
-			u(x,0)=e^x, & 0<x<1\\
-			u_x(0,t)=e^{-t}, u_x(1,t)=e^{1-t}, & t>0
-		\end{align}
-		\textbf{(a)} Choose $k=0.0025$ and $nmax=9$ (so $h=0.1$) and compare the numerical and exact solutions, $u(x,t)=e^{x-t}$, at time $t=0.5$.\\
-		\textbf{(b)} Choose $k=0.01$ and $nmax=9$ and compare the numerical and exact solutions at time $t=0.5$.\\
-		\textbf{(c)} Choose $k=0.01$ and $nmax=99$ (so $h=0.01$) and compare the numerical and exact solutions at time $t=0.5$.
-		\\[12pt]
-		
-		\noindent\textbf{6.} Use Algorithm 8.5 to approximate the solution of the initial-boundary-value problem 
-		\begin{align}
-			u_t-u_xx=-2e^{x-t}, & 0<x<1,\, t>0\\
 			u(x,0)=e^x, & 0<x<1\\
 			u(0,t)=e^{-t}, u(1,t)=e^{1-t}, & t>0
 		\end{align}
@@ -495,20 +460,196 @@ plt.show()
 		\textbf{(c)} Choose $k=0.01$ and $nmax=99$ (so $h=0.01$) and compare the numerical and exact solutions at time $t=0.5$.
 		\\[12pt]
 		
+
+\begin{small}
+\begin{verbatim}
+import numpy as np
+        
+# Backward Difference Method - Neumann Initial-Boundary-Value Problem
+def algorithm_8_5(diffusivity,
+                  endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    # Define a grid
+    increment = endpoint / (number_of_nodes - 1)
+    coefficient_r = diffusivity * time_step / increment ** 2
+        
+    # Initialize numerical solution
+    t = np.zeros((number_of_time_steps + 1,))
+    x = np.zeros((number_of_nodes + 1,))
+    x[0] = -increment
+    U = np.zeros((number_of_nodes + 1,)) 
+    for n in np.arange(number_of_nodes):
+        x[n + 1] = x[n] + increment
+        U[n + 1] = initial_condition(x[n + 1])
+
+    term_a = np.zeros((number_of_nodes + 1,))
+    term_b = np.zeros((number_of_nodes + 1,))
+    term_c = np.zeros((number_of_nodes + 1,))
+    term_d = np.zeros((number_of_nodes + 1,))    
+    # Begin time stepping  
+    for j in np.arange(number_of_time_steps):
+        # Define tridiagonal system
+        t[j + 1] = t[j]  + time_step
+        for n in np.arange(number_of_nodes):
+            term_a[n + 1] = - coefficient_r
+            term_b[n + 1] = 1 + 2 * coefficient_r
+            term_c[n + 1] = - coefficient_r
+            term_d[n + 1] = U[n + 1] + time_step * right_side(x[n + 1], t[j + 1])
+        term_d[1] = term_d[1] - \
+        	2 * increment * coefficient_r * boundary_condition_left(t[j + 1])
+        term_d[number_of_nodes] = term_d[number_of_nodes] + \
+        	2 * increment * coefficient_r * boundary_condition_right(t[j + 1])
+        term_c[1] = -2 * coefficient_r
+        term_a[number_of_nodes] = -2 * coefficient_r
+        # Advance solution one time step
+        term_d = algorithm_8_2(term_a, term_b, term_c, term_d, number_of_nodes)
+        for n in np.arange(number_of_nodes):
+            U[n + 1] = term_d[n + 1]   
+    # Output numerical solution
+
+    #t = t[:-1]
+    x = x[1:]
+    U = U[1:]
+            
+    return U, x, t
+
+import math
+
+# right_side
+def S(x, t):
+    return -2.0 * math.e ** (x - t)
+
+# initial_condition
+def f(x):
+    return math.e ** x
+
+# boundary_condition_left
+def p(t):
+    return  math.e ** -t
+
+# boundary_condition_right
+def q(t):
+    return math.e ** (1 - t)
+
+# exact_answer	
+def u(x, t):
+	return math.e ** (x - t)
+
+a2 = 1 # diffusivity
+L = 1 # endpoint
+k = 0.0025 # time_step
+nmax = 9 # number_of_nodes
+end_time = 0.5
+jmax = int(end_time / k) # number_of_time_steps
+
+numerical_answer, x, t = algorithm_8_5(a2,
+                       L,
+                       k,
+                       jmax,
+                       nmax,
+                       S,
+                       f,
+                       p,
+                       q)
+exact_answer = u(x, t[-1])
+answer_error = (numerical_answer - exact_answer) / (exact_answer)
+answer_error = answer_error * 100
+
+from matplotlib import pyplot as plt
+
+fig, ax1 = plt.subplots()
+
+ax1.set_xlabel('Position')
+ax1.set_ylabel('Temperature')
+ax1.plot(x, numerical_answer, 'r', label='Numerical Solution')
+ax1.plot(x, exact_answer, 'g', label='Exact Solution')
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('Percent Error')
+ax2.plot(x, answer_error, 'b', label='Percent Error')
+
+ax1.legend()
+ax2.legend()
+
+plt.show()
+\end{verbatim}
+\end{small}
+
+	\section{Fourier's Method for Difference Equations}
+	
+		\noindent\textbf{5.} Given the initial-boundary-value problem
+		\begin{align}
+			u_t-u_{xx}=0, & 0<x<1,\, t>0\\
+			u(x,0)=x^2, & 0<x<1\\
+			u_x(0,t)=0=u_x(1,t), & t>0
+		\end{align}
+		and the grid $x_1=0$, $x_2=1/2$, and $x_3=1$, so $N=3$,\\
+		\textbf{(a)} Use the matrix $\mathbf{F}_2$ to formulate a forward-in-time difference system.\\
+		\textbf{(b)} Use the matrix $\mathbf{F}_2$ to formulate a backward-in-time difference system.\\
+		\textbf{(c)} Use the matrix $\mathbf{F}_2$ to formulate a Crank-Nicolson difference system.\\
+		\textbf{(d)} Use Fourier's method to solve the system (a).\\
+		\textbf{(e)} Use Fourier's method to solve the system (b).\\
+		\textbf{(f)} Use Fourier's method to solve the system (c).\\[12pt]	
+		
+		\noindent\textbf{6.} Given the initial-boundary-value problem
+		\begin{align}
+			u_t-u_{xx}=0, & 0<x<1,\, t>0\\
+			u(x,0)=x^2, & 0<x<1\\
+			u_x(0,t)=0=u_x(1,t), & t>0
+		\end{align}
+		and the grid $x_1=0$, $x_2=1/3$, and $x_3=2/3$, so $N=3$,\\
+		\textbf{(a)} Use the matrix $\mathbf{F}_2$ to formulate a forward-in-time difference system.\\
+		\textbf{(b)} Use the matrix $\mathbf{F}_2$ to formulate a backward-in-time difference system.\\
+		\textbf{(c)} Use the matrix $\mathbf{F}_2$ to formulate a Crank-Nicolson difference system.\\
+		\textbf{(d)} Use Fourier's method to solve the system (a).\\
+		\textbf{(e)} Use Fourier's method to solve the system (b).\\
+		\textbf{(f)} Use Fourier's method to solve the system (c).\\[12pt]		
+		
+		\noindent\textbf{7.} Given the initial-boundary-value problem
+		\begin{align}
+			u_t-u_{xx}=0, & 0<x<1,\, t>0\\
+			u(x,0)=x, & 0<x<1\\
+			u_x(0,t)=0=u_x(1,t), & t>0
+		\end{align}
+		and the grid $x_1=0$, $x_2=1/4, x_3=1/2, x_4=3/4$, and $x_5=1$, so $N=5$,\\
+		\textbf{(a)} Use the matrix $\mathbf{F}_2$ to formulate a forward-in-time difference system.\\
+		\textbf{(b)} Use the matrix $\mathbf{F}_2$ to formulate a backward-in-time difference system.\\
+		\textbf{(c)} Use the matrix $\mathbf{F}_2$ to formulate a Crank-Nicolson difference system.\\
+		\textbf{(d)} Use Fourier's method to solve the system (a).\\
+		\textbf{(e)} Use Fourier's method to solve the system (b).\\
+		\textbf{(f)} Use Fourier's method to solve the system (c).\\[12pt]		
+		
 \chapter{Numerical Solutions of Hyperbolic Equations}
 
-\section{Difference Methods for a Scalar Initial-Value Problem}
+	\section{Difference Methods for a Scalar Initial-Value Problem}
 
-	\noindent\textbf{1.} Modify Algorithm 9.1 to implement\\
-	\textbf{(a)} FTBS method\\
-	\textbf{(b)} FTFS method\\
-	\textbf{(c)} Lax-Friedrichs method\\
-	\textbf{(d)} leapfrog method\\[12pt]
-	
-	\noindent\textbf{2.} Approximate the solution of the initial-value problem of Example 9.1.3 on the interval $0\leq x\leq 1$ for $0\leq t_j\leq 1.5$ with $h=0.1$ and $k=0.075$ using\\
-	\textbf{(a)} FTBS method\\
-	\textbf{(b)} Lax-Friederichs method\\
-	\textbf{(c)} leapfrog method\\[12pt]
+		\noindent\textbf{1.} Modify Algorithm 9.1 to implement\\
+		\textbf{(a)} FTBS method\\
+		\textbf{(b)} FTFS method\\
+		\textbf{(c)} Lax-Friedrichs method\\
+		\textbf{(d)} leapfrog method\\[12pt]
+		
+		\noindent\textbf{2.} Approximate the solution of the initial-value problem of Example 9.1.3 on the interval $0\leq x\leq 1$ for $0\leq t_j\leq 1.5$ with $h=0.1$ and $k=0.075$ using\\
+		\textbf{(a)} FTBS method\\
+		\textbf{(b)} Lax-Friederichs method\\
+		\textbf{(c)} leapfrog method\\[12pt]
+		
+		\noindent\textbf{3.} Repeat exercise 2 with $h=0.1$ and $k=0.1$.\\[12pt]
+		
+		\noindent\textbf{4.} Given the initial-value problem 
+		\begin{align}
+			u_x+u_t=2xt+x^2, & -\infty<x<\infty,\, t>0\\
+			u(x,0)=0, & -\infty<x<\infty\\
+		\end{align}
+		whose exact solution is $u(x,t)=x^2t$. Find the local truncation error for this problem when using
+		\textbf{(a)} FTBS method\\
+		\textbf{(b)} Lax-Wendroff method\\[12pt]	
 
 \backmatter
 

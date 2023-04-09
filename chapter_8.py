@@ -155,10 +155,8 @@ ax2.legend()
 
 plt.show()
 
-## Problem 8.3.5
-
+# Problem 8.3.5
 import numpy as np
-
 
 # Solution of a Tridiagonal Linear System
 def algorithm_8_2(a, # subdiagonal
@@ -176,7 +174,7 @@ def algorithm_8_2(a, # subdiagonal
     # Back substitude and store in solution array in d
     d[number_of_nodes] = d[number_of_nodes] / b[number_of_nodes]
     for l in np.arange(number_of_nodes - 1):
-        n = number_of_nodes - l
+        n = number_of_nodes - (l + 1)
         d[n] = (d[n] - c[n] * d[n + 1]) / b[n]
     return d
         
@@ -203,8 +201,8 @@ def algorithm_8_3(diffusivity,
     for n in np.arange(number_of_nodes):
         x[n + 1] = x[n] + increment
         U[n + 1] = initial_condition(x[n + 1])
-    x[number_of_nodes] = endpoint
     U[number_of_nodes + 1] = (boundary_condition_right(0) + initial_condition(endpoint)) / 2
+    x[number_of_nodes + 1] = endpoint
 
     term_a = np.zeros((number_of_nodes + 2,))
     term_b = np.zeros((number_of_nodes + 2,))
@@ -229,8 +227,6 @@ def algorithm_8_3(diffusivity,
     # Output numerical solution        
     U[0] = boundary_condition_left(t[j + 1])
     U[number_of_nodes + 1] = boundary_condition_right(t[j + 1])
-
-    t = t[:-1]
             
     return U, x, t
 
@@ -293,3 +289,127 @@ ax1.legend()
 ax2.legend()
 
 plt.show()
+
+print(x)
+print(numerical_answer)
+print(exact_answer)
+
+# Problem 8.3.6
+import numpy as np
+        
+# Backward Difference Method - Neumann Initial-Boundary-Value Problem
+def algorithm_8_5(diffusivity,
+                  endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    # Define a grid
+    increment = endpoint / (number_of_nodes - 1)
+    coefficient_r = diffusivity * time_step / increment ** 2
+        
+    # Initialize numerical solution
+    t = np.zeros((number_of_time_steps + 1,))
+    x = np.zeros((number_of_nodes + 1,))
+    x[0] = -increment
+    U = np.zeros((number_of_nodes + 1,)) 
+    for n in np.arange(number_of_nodes):
+        x[n + 1] = x[n] + increment
+        U[n + 1] = initial_condition(x[n + 1])
+
+    term_a = np.zeros((number_of_nodes + 1,))
+    term_b = np.zeros((number_of_nodes + 1,))
+    term_c = np.zeros((number_of_nodes + 1,))
+    term_d = np.zeros((number_of_nodes + 1,))    
+    # Begin time stepping  
+    for j in np.arange(number_of_time_steps):
+        # Define tridiagonal system
+        t[j + 1] = t[j]  + time_step
+        for n in np.arange(number_of_nodes):
+            term_a[n + 1] = - coefficient_r
+            term_b[n + 1] = 1 + 2 * coefficient_r
+            term_c[n + 1] = - coefficient_r
+            term_d[n + 1] = U[n + 1] + time_step * right_side(x[n + 1], t[j + 1])
+        term_d[1] = term_d[1] - 2 * increment * coefficient_r * boundary_condition_left(t[j + 1])
+        term_d[number_of_nodes] = term_d[number_of_nodes] + 2 * increment * coefficient_r * boundary_condition_right(t[j + 1])
+        term_c[1] = -2 * coefficient_r
+        term_a[number_of_nodes] = -2 * coefficient_r
+        # Advance solution one time step
+        term_d = algorithm_8_2(term_a, term_b, term_c, term_d, number_of_nodes)
+        for n in np.arange(number_of_nodes):
+            U[n + 1] = term_d[n + 1]   
+    # Output numerical solution
+
+    #t = t[:-1]
+    x = x[1:]
+    U = U[1:]
+            
+    return U, x, t
+
+import math
+
+# right_side
+def S(x, t):
+    return -2.0 * math.e ** (x - t)
+
+# initial_condition
+def f(x):
+    return math.e ** x
+
+# boundary_condition_left
+def p(t):
+    return  math.e ** -t
+
+# boundary_condition_right
+def q(t):
+    return math.e ** (1 - t)
+
+# exact_answer	
+def u(x, t):
+	return math.e ** (x - t)
+
+a2 = 1 # diffusivity
+L = 1 # endpoint
+k = 0.0025 # time_step
+nmax = 9 # number_of_nodes
+end_time = 0.5
+jmax = int(end_time / k) # number_of_time_steps
+
+numerical_answer, x, t = algorithm_8_5(a2,
+                       L,
+                       k,
+                       jmax,
+                       nmax,
+                       S,
+                       f,
+                       p,
+                       q)
+exact_answer = u(x, t[-1])
+answer_error = (numerical_answer - exact_answer) / (exact_answer)
+answer_error = answer_error * 100
+
+from matplotlib import pyplot as plt
+
+fig, ax1 = plt.subplots()
+
+ax1.set_xlabel('Position')
+ax1.set_ylabel('Temperature')
+ax1.plot(x, numerical_answer, 'r', label='Numerical Solution')
+ax1.plot(x, exact_answer, 'g', label='Exact Solution')
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('Percent Error')
+ax2.plot(x, answer_error, 'b', label='Percent Error')
+
+ax1.legend()
+ax2.legend()
+
+plt.show()
+
+print(t[-1])
+print(x)
+print(numerical_answer)
+print(exact_answer)
