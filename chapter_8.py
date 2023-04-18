@@ -413,3 +413,118 @@ print(t[-1])
 print(x)
 print(numerical_answer)
 print(exact_answer)
+
+# Problem 8.4.5
+import numpy as np
+import math
+
+def node_points(endpoint, number_of_nodes):
+    increment = endpoint / (number_of_nodes - 1)
+    x = [i * increment for i in range(number_of_nodes)]
+    #x = np.array(x)
+    return x
+
+def eigenvalue(n, N):
+    return 2 * (1 - math.cos((n - 1) * math.pi / (N - 1)))
+
+# eigenvector Vn
+def eigenvector_v(n, N, L):
+    #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
+    x = node_points(L, N) 
+    output = [math.cos((n - 1) * math.pi * y) for y in x]
+    output = np.array(output)
+    return output
+
+# eigenvector Wn
+def eigenvector_w(n, N, L):
+    #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
+    x = node_points(L, N)
+    output = [2 * math.cos((n - 1) * math.pi * y) for y in x]
+    output[0] = output[0] / 2
+    output[-1] = output[-1] / 2
+    output = np.array(output)
+    return output
+
+# initial_condition
+def f(x):
+    return x ** 2
+
+def coefficients(N, initial_condition, L):
+    output = [coefficient(i + 1, N, initial_condition, L) for i in range(N)]
+    output = np.array(output)
+    return output
+    
+def coefficient(n, N, initial_condition, L):
+    x = node_points(L, N)
+    initial = [initial_condition(y) for y in x]
+    initial = np.array(initial)
+    output = np.dot(initial, eigenvector_w(n, N, L))
+    output = output / np.dot(eigenvector_v(n, N, L), eigenvector_w(n, N, L))
+    return output
+
+# Forward-in-time (FIT)
+# Neumann-Neumann (NN) Initial-Boundary-Value Problem
+def solve_nn_fit(endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    j = number_of_time_steps
+    increment = endpoint / (number_of_nodes - 1)
+    coefficient_r = time_step / increment ** 2
+    matrix_b = lambda number: 1 - coefficient_r * number
+    matrix_a = lambda number: 1
+    U = np.zeros((number_of_nodes,)) 
+    for n in np.arange(number_of_nodes):
+        l = eigenvalue(n + 1, number_of_nodes)
+        V = eigenvector_v(n + 1, number_of_nodes, endpoint)
+        c_n = coefficient(n + 1, number_of_nodes, initial_condition, endpoint)
+        U = U + (matrix_b(l) / matrix_a(l)) ** j * c_n * V   
+    return U
+
+# Backward-in-time (BIT)
+# Neumann-Neumann (NN) Initial-Boundary-Value Problem
+def solve_nn_bit(endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    U = np.zeros((number_of_nodes,))
+    return U
+
+# Crank-Nicolson (CN)
+# Neumann-Neumann (NN) Initial-Boundary-Value Problem
+def solve_nn_cn(endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    U = np.zeros((number_of_nodes,))
+    return U
+
+L = 1 # endpoint
+k = 0.0025 # time_step
+nmax = 3 # number_of_nodes
+end_time = 0.5
+jmax = int(end_time / k) # number_of_time_steps
+
+
+answer_a = solve_nn_fit(L,
+                  k,
+                  jmax,
+                  nmax,
+                  0,
+                  f,
+                  0,
+                  0)
+    
+print(answer_a)
