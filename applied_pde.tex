@@ -790,7 +790,18 @@ answer_a = solve_nn_fit(L,
 		\end{align}
 		whose exact solution is $u(x,t)=x^2t$. Find the local truncation error for this problem when using
 		\textbf{(a)} FTBS method\\
-		\textbf{(b)} Lax-Wendroff method\\[12pt]	
+		\textbf{(b)} Lax-Wendroff method\\[12pt]
+		
+		\noindent\textbf{8.} Consider the initial-value problem
+		\begin{align}
+			u_x+u_t&=0, & -\infty<x<\infty,\, t>0\\
+			u(x,0)&=
+			\begin{cases}
+				1, & |x|<0.5,\\
+				0, & |x|\geq 0.5,
+			\end{cases} & -\infty<x<\infty
+		\end{align}		
+			
 
 \backmatter
 
