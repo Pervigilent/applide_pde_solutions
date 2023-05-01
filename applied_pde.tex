@@ -750,7 +750,37 @@ answer_a = solve_nn_fit(L,
 		\textbf{(c)} Use the matrix $\mathbf{F}_2$ to formulate a Crank-Nicolson difference system.\\
 		\textbf{(d)} Use Fourier's method to solve the system (a).\\
 		\textbf{(e)} Use Fourier's method to solve the system (b).\\
-		\textbf{(f)} Use Fourier's method to solve the system (c).\\[12pt]		
+		\textbf{(f)} Use Fourier's method to solve the system (c).\\[12pt]
+		
+		\noindent\textbf{(a)}
+		\begin{align}
+			A(\mathbf{F}_3)\mathbf{U}^{j+1} & = B(\mathbf{F}_3)\mathbf{U}^j\\
+			\mathbf{U}^0 & = \mathbf{f}\\
+			A(\lambda) & = 1\\
+			B(\lambda) & = 1-r\lambda\\			
+			c^j_n & = \frac{\mathbf{U}^j\cdot\mathbf{W}_n}{\mathbf{V}_n\cdot\mathbf{W}_n}\\
+			& = \left[\frac{B(\lambda_n)}{A(\lambda_n)}\right]^jc^0_n\\
+			& = \left[\frac{B(\lambda_n)}{A(\lambda_n)}\right]^j\frac{\mathbf{f}\cdot\mathbf{W}_n}{\mathbf{V}_n\cdot\mathbf{W}_n}\\
+			\mathbf{U}^j & = \sum_{n=0}^N{c^j_n\mathbf{V}_n}\\
+			& = \sum_{n=0}^N{\left[\frac{B(\lambda_n)}{A(\lambda_n)}\right]^jc^0_n\mathbf{V}_n}\\
+			& = \sum_{n=0}^N{(1-r\lambda_n)^{-j}c^0_n\mathbf{V}_n}\\
+		\end{align}
+		\textbf{(b)}
+		\begin{align}
+			A(\mathbf{F}_3)\mathbf{U}^{j+1} & = B(\mathbf{F}_3)\mathbf{U}^j\\
+			\mathbf{U}^0 & = \mathbf{f}\\
+			c^0_n & = \frac{\mathbf{f}\cdot\mathbf{W}_n}{\mathbf{V}_n\cdot\mathbf{W}_n}\\
+			A(\lambda) & = 1+r\lambda\\
+			B(\lambda) & = 1
+		\end{align}
+		\textbf{(c)}
+		\begin{align}
+			A(\mathbf{F}_3)\mathbf{U}^{j+1} & = B(\mathbf{F}_3)\mathbf{U}^j\\
+			\mathbf{U}^0 & = \mathbf{f}\\
+			c^0_n & = \frac{\mathbf{f}\cdot\mathbf{W}_n}{\mathbf{V}_n\cdot\mathbf{W}_n}\\
+			A(\lambda) & = 1+r\lambda/2\\
+			B(\lambda) & = 1-r\lambda/2
+		\end{align}		
 		
 		\noindent\textbf{7.} Given the initial-boundary-value problem
 		\begin{align}

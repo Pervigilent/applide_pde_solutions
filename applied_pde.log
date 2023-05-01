@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  30 APR 2023 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  30 APR 2023 23:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -346,42 +346,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 746--754
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 760--768
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 790--798
 
  []
 
-[14]
+[15] [16
+
+
+]
 Chapter 3
 
-Underfull \hbox (badness 10000) in paragraph at lines 773--778
+Underfull \hbox (badness 10000) in paragraph at lines 803--808
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 779--783
+Underfull \hbox (badness 10000) in paragraph at lines 809--813
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 784--785
+Underfull \hbox (badness 10000) in paragraph at lines 814--815
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 790--794
+Underfull \hbox (badness 10000) in paragraph at lines 820--824
 
  []
 
-[15
-
-
-] [16
+[17] [18
 
 
 ]
 Bibliography
-[17
+[19
 
 
 ] (./applied_pde.aux) ) 
@@ -409,10 +409,10 @@ pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
 fb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on applied_pde.pdf (23 pages, 234121 bytes).
+Output written on applied_pde.pdf (25 pages, 237800 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 166 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

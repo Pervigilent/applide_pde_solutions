@@ -424,19 +424,20 @@ def node_points(endpoint, number_of_nodes):
     #x = np.array(x)
     return x
 
-def eigenvalue(n, N):
+# eigenvalues for F2
+def eigenvalue_f2(n, N):
     return 2 * (1 - math.cos((n - 1) * math.pi / (N - 1)))
 
-# eigenvector Vn
-def eigenvector_v(n, N, L):
+# eigenvector Vn for F2
+def eigenvector_v_f2(n, N, L):
     #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
     x = node_points(L, N) 
     output = [math.cos((n - 1) * math.pi * y) for y in x]
     output = np.array(output)
     return output
 
-# eigenvector Wn
-def eigenvector_w(n, N, L):
+# eigenvector Wn for F2
+def eigenvector_w_f2(n, N, L):
     #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
     x = node_points(L, N)
     output = [2 * math.cos((n - 1) * math.pi * y) for y in x]
@@ -454,7 +455,7 @@ def coefficients(N, initial_condition, L):
     output = np.array(output)
     return output
     
-def coefficient(n, N, initial_condition, L):
+def coefficient(n, N, initial_condition, L, eigenvector_w, eigenvector_v):
     x = node_points(L, N)
     initial = [initial_condition(y) for y in x]
     initial = np.array(initial)
@@ -479,9 +480,14 @@ def solve_nn_fit(endpoint,
     matrix_a = lambda number: 1
     U = np.zeros((number_of_nodes,)) 
     for n in np.arange(number_of_nodes):
-        l = eigenvalue(n + 1, number_of_nodes)
-        V = eigenvector_v(n + 1, number_of_nodes, endpoint)
-        c_n = coefficient(n + 1, number_of_nodes, initial_condition, endpoint)
+        l = eigenvalue_f2(n + 1, number_of_nodes)
+        V = eigenvector_v_f2(n + 1, number_of_nodes, endpoint)
+        c_n = coefficient(n + 1,
+        	number_of_nodes,
+        	initial_condition,
+        	endpoint,
+        	eigenvector_w_f2,
+        	eigenvector_v_f2)
         U = U + (matrix_b(l) / matrix_a(l)) ** j * c_n * V   
     return U
 
@@ -519,6 +525,77 @@ jmax = int(end_time / k) # number_of_time_steps
 
 
 answer_a = solve_nn_fit(L,
+                  k,
+                  jmax,
+                  nmax,
+                  0,
+                  f,
+                  0,
+                  0)
+    
+print(answer_a)
+
+# Problem 8.4.6
+
+# eigenvalues for F3
+def eigenvalue_f3(n, N):
+    return 2 * (1 - math.cos((2 * n - 1) * math.pi / (2 * N)))
+
+# eigenvector Vn for F3
+def eigenvector_v_f3(n, N, L):
+    #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
+    x = node_points(L, N) 
+    output = [math.cos((2 * n - 1) * math.pi * y / 2) for y in x]
+    output = np.array(output)
+    return output
+
+# eigenvector Wn for F3
+def eigenvector_w_f3(n, N, L):
+    #x = [((i + 1) - 1) / (N - 1) for i in range(N)]
+    x = node_points(L, N)
+    output = [2 * math.cos((2 * n - 1) * math.pi * y / 2) for y in x]
+    output[0] = output[0] / 2
+    output[-1] = output[-1] / 2
+    output = np.array(output)
+    return output
+    
+# Forward-in-time (FIT)
+# Neumann-Dirichlet (ND) Initial-Boundary-Value Problem
+def solve_nd_fit(endpoint,
+                  time_step,
+                  number_of_time_steps,
+                  number_of_nodes,
+                  right_side,
+                  initial_condition,
+                  boundary_condition_left,
+                  boundary_condition_right):
+    j = number_of_time_steps
+    increment = endpoint / (number_of_nodes - 1)
+    coefficient_r = time_step / increment ** 2
+    matrix_b = lambda number: 1 - coefficient_r * number
+    matrix_a = lambda number: 1
+    U = np.zeros((number_of_nodes,)) 
+    for n in np.arange(number_of_nodes):
+        l = eigenvalue_f3(n + 1, number_of_nodes)
+        V = eigenvector_v_f3(n + 1, number_of_nodes, endpoint)
+        c_n = coefficient(n + 1,
+        	number_of_nodes,
+        	initial_condition,
+        	endpoint,
+        	eigenvector_w_f3,
+        	eigenvector_v_f3)
+        U = U + (matrix_b(l) / matrix_a(l)) ** j * c_n * V   
+    return U
+
+L = 1 # endpoint
+k = 0.0025 # time_step
+nmax = 3 # number_of_nodes
+end_time = 0.5
+jmax = int(end_time / k) # number_of_time_steps
+
+
+
+answer_a = solve_nd_fit(L,
                   k,
                   jmax,
                   nmax,
