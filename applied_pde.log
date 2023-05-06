@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  30 APR 2023 23:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  6 MAY 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -231,30 +231,30 @@ e
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
 Contents
-(./applied_pde.toc)
+(./applied_pde.toc [3
+
+
+])
 \tf@toc=\write3
 \openout3 = `applied_pde.toc'.
 
- [3
-
-
-] [4
-
-
-]
+ [4]
 Preface
-[5] [6
+[5
+
+
+] [6
 
 
 ]
 Chapter 1
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--115
+Underfull \hbox (badness 10000) in paragraph at lines 114--117
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--127
+Underfull \hbox (badness 10000) in paragraph at lines 125--129
 
  []
 
@@ -263,39 +263,69 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--127
 
 ] [2]
 Chapter 2
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--182
-
- []
-
 [3
 
 
-]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+] [4
 
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 306--311
+
+]
+Chapter 3
+[5] [6
+
+
+]
+Chapter 4
+[7] [8
+
+
+]
+Chapter 5
+[9] [10
+
+
+]
+Chapter 6
+[11] [12
+
+
+]
+Chapter 7
+[13] [14
+
+
+]
+Chapter 8
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--260
 
  []
 
-[5]
+[15]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6]
-Overfull \hbox (22.72055pt too wide) in paragraph at lines 449--449
+ [16]
+Underfull \hbox (badness 10000) in paragraph at lines 384--389
+
+ []
+
+[17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [18]
+Overfull \hbox (22.72055pt too wide) in paragraph at lines 527--527
 []            \OT1/cmtt/m/n/9 term_d[n + 1] = U[n + 1] + time_step * right_side
 (x[n + 1], t[j + 1])[] 
  []
 
 
-Overfull \hbox (22.72055pt too wide) in paragraph at lines 449--449
+Overfull \hbox (22.72055pt too wide) in paragraph at lines 527--527
 []        \OT1/cmtt/m/n/9 term_d[1] = term_d[1] + coefficient_r * boundary_cond
 ition_left(t[j + 1])[] 
  []
 
 
-Overfull \hbox (13.27066pt too wide) in paragraph at lines 449--449
+Overfull \hbox (13.27066pt too wide) in paragraph at lines 527--527
 []        \OT1/cmtt/m/n/9 term_d = algorithm_8_2(term_a, term_b, term_c, term_d
 , number_of_nodes)[] 
  []
@@ -303,19 +333,19 @@ Overfull \hbox (13.27066pt too wide) in paragraph at lines 449--449
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 457--462
+ [19]
+Underfull \hbox (badness 10000) in paragraph at lines 535--540
 
  []
 
-[8]
-Overfull \hbox (22.72055pt too wide) in paragraph at lines 581--581
+[20]
+Overfull \hbox (22.72055pt too wide) in paragraph at lines 659--659
 []            \OT1/cmtt/m/n/9 term_d[n + 1] = U[n + 1] + time_step * right_side
 (x[n + 1], t[j + 1])[] 
  []
 
 
-Overfull \hbox (13.27066pt too wide) in paragraph at lines 581--581
+Overfull \hbox (13.27066pt too wide) in paragraph at lines 659--659
 []        \OT1/cmtt/m/n/9 term_d = algorithm_8_2(term_a, term_b, term_c, term_d
 , number_of_nodes)[] 
  []
@@ -323,16 +353,16 @@ Overfull \hbox (13.27066pt too wide) in paragraph at lines 581--581
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9]
+ [21]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10]
-Underfull \hbox (badness 10000) in paragraph at lines 591--599
+ [22]
+Underfull \hbox (badness 10000) in paragraph at lines 669--677
 
  []
 
-[11]
-Overfull \hbox (8.54572pt too wide) in paragraph at lines 713--713
+[23]
+Overfull \hbox (8.54572pt too wide) in paragraph at lines 791--791
 []        \OT1/cmtt/m/n/9 c_n = coefficient(n + 1, number_of_nodes, initial_con
 dition, endpoint)[] 
  []
@@ -340,48 +370,59 @@ dition, endpoint)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12]
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 746--754
+ [24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+Underfull \hbox (badness 10000) in paragraph at lines 824--832
 
  []
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 790--798
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 868--876
 
  []
 
-[15] [16
+[27] [28
 
 
 ]
-Chapter 3
+Chapter 9
 
-Underfull \hbox (badness 10000) in paragraph at lines 803--808
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 809--813
+Underfull \hbox (badness 10000) in paragraph at lines 889--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 814--815
+Underfull \hbox (badness 10000) in paragraph at lines 895--899
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 820--824
+Underfull \hbox (badness 10000) in paragraph at lines 900--901
 
  []
 
-[17] [18
+
+Underfull \hbox (badness 10000) in paragraph at lines 906--910
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29]
+[30]
+Chapter 10
+[31
+
+
+] [32
 
 
 ]
 Bibliography
-[19
+[33
 
 
 ] (./applied_pde.aux) ) 
@@ -409,10 +450,10 @@ pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
 fb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on applied_pde.pdf (25 pages, 237800 bytes).
+Output written on applied_pde.pdf (39 pages, 250505 bytes).
 PDF statistics:
- 166 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
+ 212 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
