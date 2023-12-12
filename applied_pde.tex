@@ -68,21 +68,23 @@
 \frontmatter
 \title[Applied PDE Solutions]{Solutions Manual to Applied Partial Differential Equations}
 \author[S. Nash]{Stewart Nash}
-\address[S. Nash]{362 Lowell Street%
-\hspace*{\fill}\linebreak\indent%
-Andover, MA 01810}%
+%\address[S. Nash]{362 Lowell Street%
+%\hspace*{\fill}\linebreak\indent%
+%Andover, MA 01810}%
+
 %\curraddr[P. Carlson]{Author One, current address, line 1
 %\hspace*{\fill}\linebreak
 %\indent Author One, current address, line 2}%
 \email[S. Nash]{Stewart.M.Nash@gmail.com}
-\urladdr{http://www.pervigilent.com}
-\thanks{The Author thanks DuChateau and Zachmann for such a good book. The internet for endless resources.}
+%\urladdr{http://www.pervigilent.com}
+\urladdr{https://github.com/Pervigilent/applied\_pde\_solutions}
+%\thanks{The Author thanks DuChateau and Zachmann for such a good book. The internet for endless resources.}
 %\subjclass{Primary 05C38, 15A15; Secondary 05A15, 15A18}
-\dedicatory{Dedicated to those who came before me and those who will come after.}
+%\dedicatory{Dedicated to those who came before me and those who will come after.}
 
-\begin{abstract}
-This work consists of solutions to the exercises from the volume ``Applied Partial Differential Equations'' by Paul DuChateau and David Zachmann.
-\end{abstract}
+%\begin{abstract}
+%This work consists of solutions to the exercises from the volume ``Applied Partial Differential Equations'' by Paul DuChateau and David Zachmann.
+%\end{abstract}
 \maketitle
 \tableofcontents
 
@@ -182,6 +184,19 @@ print("The number of non-zero elements is {0}.".format(\
 	\section{Generalized Fourier Series}
 	
 	\section{Sturm-Liouville Problems}
+	
+		\noindent\textbf{1.} Compute all the eigenvalues and corresponding eigenfunctions for the following Sturm-Liouville problems:\\
+		\textbf{(a)} $-u''(x)=\mu u(x),\,u(0)=u'(1)=0$\\
+		\textbf{(b)} $-v''(x)=\mu v(x),\,v(0)=v(2)=0$\\
+		\textbf{(c)} $-w''(x)=\mu w(x),\,w'(0)=w(1)=0$\\
+		\textbf{(d)} $-z''(x)=\mu z(x),\,z'(0)=z'(2)=0$
+		\\[12pt]
+		\textbf{(a)} $\mu_n=[(n-\frac{1}{2})\pi]^2,\,u_n(x)=\sin{(n-\frac{1}{2})\pi x},\,n=1,2,\ldots$\\
+		\textbf{(b)} $\mu_n=[n\pi/2]^2,\,u_n(x)=\sin{(n\pi/2)x},\,n=1,2,\ldots$\\
+		\textbf{(c)} $\mu_n=[(n-\frac{1}{2})\pi]^2,\,u_n(x)=\cos{(n-\frac{1}{2})\pi x},\,n=0,1,2,\ldots$\\
+		\textbf{(d)} $\mu_0=0,\,\mu_n=[n\pi/2]^2,\,u_0(x)=\sqrt{\frac{1}{2}},\,u_n(x)=\cos{(n\pi/2)x},\,n=1,2,\ldots$
+		\\[12pt]		
+	
 	
 	\section{Discrete Fourier Series}
 	
